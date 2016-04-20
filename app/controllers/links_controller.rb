@@ -1,5 +1,5 @@
 class LinksController < ApplicationController
-  before_action :set_link, only: [:show, :edit, :update, :destroy]
+  before_action :set_link, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   before_filter :authenticate_user!, except: [:index, :show]
 
   # GET /links
@@ -64,13 +64,11 @@ class LinksController < ApplicationController
   end
 
   def upvote
-    @link=set_link
     @link.upvote_by current_user
     redirect_to :back
   end
 
   def downvote
-    @link=set_link
     @link.downvote_by current_user
     redirect_to :back
   end
